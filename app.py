@@ -61,14 +61,11 @@ st.markdown("""
                .block-container {
                     padding-top: 5rem;
                     padding-bottom: 0rem;
-                    padding-left: 15rem;
+                    padding-left: 5rem;
                     padding-right: 5rem;
                 }
         </style>
         """, unsafe_allow_html=True)
-
-
-
 
 
 # ---- LOAD CSS, PDF & PROFILE PIC ----
@@ -81,45 +78,50 @@ with open(resume_file, "rb") as pdf_file:
 profile_pic = Image.open(profile_pic)
 
 
-
 # ---- HERO SECTION ----
-col1, col2, col3 = st.columns([1,2,1], gap="small")
+with st.container():
+	col1, col2, col3 = st.columns([1,2,1], gap="small")
 
-with col1:
-	st_lottie(pfp)
+	with col1:
+		st_lottie(pfp, height=300, width=300)
 
-with col2:
-	st.title(NAME)
-	st.write(Description)
-	st.download_button(
-		label="Download Resume",
-		data=PDFbyte,
-		file_name=resume_file.name,
-		mime="application/octet-stream",
-	)
-	st.write(EMAIL)
+	with col2:
+		st.title(NAME)
+		st.write(Description)
+		st.download_button(
+			label="Download Resume",
+			data=PDFbyte,
+			file_name=resume_file.name,
+			mime="application/octet-stream",
+		)
+		st.write(EMAIL)
 
 
 
 
 # ---- SOCIAL LINKS ----
-st.write("#")
-cols = st.columns(len(SOCIAL_MEDIA)+1)
-for index, (platform, link) in enumerate(SOCIAL_MEDIA.items()):
-	cols[index].write(f"[{platform}]({link})")
+with st.container():
+	col_R, col_C, col_L = st.columns([1,2.5,1])
+	with col_C:
+		cols = st.columns(len(SOCIAL_MEDIA)+1)
+		for index, (platform, link) in enumerate(SOCIAL_MEDIA.items()):
+			cols[index].write(f"[{platform}]({link})")
 
 
 
 
 
 # ---- PROJECTS ----
-st.write("#")
-st.subheader("Projects")
-st.write("---")
-for project, link in PROJECTS.items():
-	st.write(f"[{project}]({link})")
+with st.container():
+	col_R, col_C, col_L = st.columns([1,5,1])
+	with col_C:
+		st.write("#")
+		st.subheader("Projects")
+		st.write("---")
+		for project, link in PROJECTS.items():
+			st.write(f"[{project}]({link})")
 
-st.write("##")
+		st.write("##")
 
 
 
@@ -144,17 +146,21 @@ with col5:
 
 
 # ---- EXPERIENCE & QUALIFICATIONS ----
-st.write("#")
-st.subheader("Experience & Qualifications")
-st.write(
-	"""
-	- Bachelor of Technology (2019-23)
-	- Freelance:
-		- 3 months of freelancing as a web developer; 
-		- utilized p5 library of JavaScript, known for its emphasis on creative coding;
-		- Fixed 75% of previously existing bugs.
-	"""
-)
+with st.container():
+	col_R, col_C, col_L = st.columns([1,5,1])
+	with col_C:
+		st.write("#")
+		st.subheader("Experience & Qualifications")
+		st.write(
+		"""
+		- Bachelor of Technology (2019-23)
+		- Freelance:
+			- 3 months of freelancing as a web developer; 
+			- utilized p5 library of JavaScript, known for its emphasis on creative coding;
+			- Fixed 75% of previously existing bugs.
+		"""
+		)
+		st.write("#")
 
 
 
