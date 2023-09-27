@@ -5,6 +5,7 @@ import requests
 import streamlit as st
 from PIL import Image
 
+from streamlit_autorefresh import st_autorefresh
 
 
 
@@ -187,3 +188,6 @@ with st.container():
 		st.markdown(contact_form, unsafe_allow_html=True)
 	with right_column:
 		st_lottie(mail_anim, height=350, key='mail')
+
+# Set the autorefresh interval
+st_autorefresh(interval=14 * 60 * 1000, key='mail1')
